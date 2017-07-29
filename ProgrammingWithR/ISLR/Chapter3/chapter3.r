@@ -64,3 +64,31 @@ lm.fit1 = lm(medv~.-age, data=Boston)
 summary(lm.fit1)
 
 # ****************************** END OF MULTIPLE LINEAR REGRESSION *******************************
+
+# ****************************** INTERACTIONS TERMS/ NON LINEAR TRANSFORMATIONS ******************
+
+summary(lm(medv~lstat*age, data=Boston))
+
+#To do non linear trasnformations we must use the function I()
+
+lm.fit2 = lm(medv~lstat+I(lstat^2))
+summary(lm.fit2)
+vif(lm.fit2)
+
+lm.fit = lm(medv~lstat)
+#We use the anova function to compare both models linear and quadratic
+
+anova(lm.fit, lm.fit2)
+par(mfrow=c(2,2))
+
+plot(lm.fit2)
+plot(lm.fit)
+
+#Cubic fits we may use the I(x^3) however this is not good in practice
+#Poly function proves useful here
+
+lm.fit5 = lm(medv~poly(lstat,5))
+summary(lm.fit5)
+
+summary(lm(medv~log(rm), data=Boston))
+# *****************************END OF INTERACTIONS TERMS / NON LINEAR TRANSFORMATIONS ************
