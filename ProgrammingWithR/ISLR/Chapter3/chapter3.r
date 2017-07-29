@@ -92,3 +92,20 @@ summary(lm.fit5)
 
 summary(lm(medv~log(rm), data=Boston))
 # *****************************END OF INTERACTIONS TERMS / NON LINEAR TRANSFORMATIONS ************
+
+# ***************************** Qualitative Predictors *******************************************
+
+#We will change the dataset to the Carseats, predicting Sales 
+fix(Carseats)
+attach(Carseats)
+names(Carseats)
+
+#Shelveloc, urban and US are qualitative predictors which may prove useful in this analysis
+
+lm.fit = lm(Sales ~.+Income:Advertising + Price:Age, data=Carseats)
+summary(lm.fit)
+
+#Constrasts function returns the dummy variables that R uses for the qualitative predictors
+contrasts(ShelveLoc)
+contrasts(US)
+# ***************************** End of Qualitative predictors ************************************
