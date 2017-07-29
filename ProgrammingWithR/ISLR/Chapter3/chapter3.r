@@ -109,3 +109,14 @@ summary(lm.fit)
 contrasts(ShelveLoc)
 contrasts(US)
 # ***************************** End of Qualitative predictors ************************************
+
+#******************************* WRITTING FUNCTIONS *********************************************
+
+loadLibraries = function(){
+  library(ISLR)
+  library(MASS)
+  print("The libraries have been loaded")
+}
+
+loadLibraries()
+
