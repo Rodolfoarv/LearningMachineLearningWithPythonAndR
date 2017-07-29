@@ -39,3 +39,28 @@ plot(predict(lm.fit), residuals(lm.fit))
 plot(predict(lm.fit), rstudent(lm.fit))
 plot(hatvalues(lm.fit))
 which.max(hatvalues(lm.fit))
+
+# ******************************   MULTIPLE LINEAR REGRESSION ************************************
+
+lm.fit = lm(medv~lstat+age)
+summary(lm.fit)
+
+#In order to put all the variables in the model
+lm.fit = lm(medv~., data=Boston)
+summary(lm.fit)
+
+#We may access individual elements of the summary ?summary.lm
+
+summary(lm.fit)$sigma
+
+# The vif function, can be used to compute the variance inflation factors
+library(car)
+vif(lm.fit)
+
+#Performing the regression on all variables except one
+#We will exclude the age since it has a high pvalue
+
+lm.fit1 = lm(medv~.-age, data=Boston)
+summary(lm.fit1)
+
+# ****************************** END OF MULTIPLE LINEAR REGRESSION *******************************
