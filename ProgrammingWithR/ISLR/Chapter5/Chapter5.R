@@ -28,3 +28,27 @@ mean((mpg-predict(lm.fit, Auto))[-train]^2)
 
 # Leave one out cross validation
 
+glm.fit = glm(mpg~horsepower, data=Auto)
+coef(glm.fit)
+library(boot)
+cv.err = cv.glm(Auto, glm.fit)
+cv.err$delta
+
+# Repeat the procedure for increasignly polynomial fits
+
+cv.error = rep(0,5)
+for ( i in 1:5 ){
+  glm.fit = glm(mpg~poly(horsepower, i), data = Auto)
+  cv.error[i] = cv.glm(Auto, glm.fit)$delta[1]
+}
+cv.error
+
+# K FOLD Cross validation
+
+set.seed(17)
+cv.error.10 = rep(0,10)
+for (i in 1:10 ){
+  glm.fit = glm(mpg~poly(horsepower, i), data = Auto)
+  cv.error.10[i] = cv.glm(Auto, glm.fit, K=10)$delta[1]
+}
+cv.error.10
