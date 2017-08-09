@@ -52,3 +52,22 @@ for (i in 1:10 ){
   cv.error.10[i] = cv.glm(Auto, glm.fit, K=10)$delta[1]
 }
 cv.error.10
+
+# Bootstrap
+
+alpha.fn = function(data,index){
+  X = data$X[index]
+  Y = data$Y[index]
+  return((var(Y) - cov(X,Y)) / (var(X) + var(Y) - 2*cov(X,Y)))
+}
+
+alpha.fn(Portfolio, 1:100)
+
+set.seed(1)
+alpha.fn(Portfolio, sample(100,100,replace=T))
+
+boot(Portfolio, alpha.fn, R=1000)
+
+
+# Estimating the accuracy of the model
+
