@@ -26,3 +26,5 @@ lm.fit = lm(mpg~horsepower, subset=train)
 mean((mpg-predict(lm.fit, Auto))[-train]^2)
 
 
+# Leave one out cross validation
+
